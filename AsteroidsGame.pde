@@ -2,14 +2,16 @@ Star[] stars = new Star[175];
 Spaceship bob = new Spaceship();
 ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
 boolean w, a, s, d;
+float collision;
 
 public void setup(){
   size(500, 500);
+  
   for(int i = 0; i < stars.length; i++){
     stars[i] = new Star();
   }
+  
 }
-
 
 public void draw(){
   background(0);
@@ -38,7 +40,14 @@ public void draw(){
     bob.turn(5);
   }
   
-  rocks.add(new Asteroid());
+  for(int i = 0; i < 16; i++){
+    rocks.add(new Asteroid());
+    rocks.get(i).show();
+    rocks.get(i).move();
+    collision = dist((float)bob.getX(), (float)bob.getY(), (float)rocks.get(i).getX(), (float)rocks.get(i).getY());
+    if (collision < 30)
+      rocks.remove(i);
+  }
 }
 
 public void keyPressed(){ 
@@ -80,8 +89,3 @@ public void keyReleased() {
     d = false;
   }  
 }
-
-
-
-
-
