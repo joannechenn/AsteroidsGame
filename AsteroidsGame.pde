@@ -21,6 +21,15 @@ public void draw(){
     stars[i].show();
   }
   
+  for(int i = 0; i < 21; i++){
+    rocks.add(new Asteroid());
+    rocks.get(i).show();
+    rocks.get(i).move();
+    collision = dist((float)bob.getX(), (float)bob.getY(), (float)rocks.get(i).getX(), (float)rocks.get(i).getY());
+    if (collision < 30)
+      rocks.remove(i);
+  }
+  
   bob.show();
   bob.move();
   
@@ -38,15 +47,6 @@ public void draw(){
   
   if(d){
     bob.turn(5);
-  }
-  
-  for(int i = 0; i < 16; i++){
-    rocks.add(new Asteroid());
-    rocks.get(i).show();
-    rocks.get(i).move();
-    collision = dist((float)bob.getX(), (float)bob.getY(), (float)rocks.get(i).getX(), (float)rocks.get(i).getY());
-    if (collision < 30)
-      rocks.remove(i);
   }
 }
 
